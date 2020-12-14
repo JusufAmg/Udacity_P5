@@ -33,6 +33,7 @@ int main() {
       game.Run(controller, renderer, kMsPerFrame);
 
       score.Add_score(name, game.GetScore());
+      score.Write();
       score.Print_scores();
       std::cout << "Press y if you want to play again\n";
       std::cin >> input;

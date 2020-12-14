@@ -35,6 +35,7 @@ void Score::Create_file()
 void Score::Add_score(std::string name, int score)
 {
 	scores.insert(std::pair<std::string, int>(name, score));
+	Sort(scores);
 }
 
 bool cmp(const std::pair<std::string, int>& a,const std::pair<std::string, int>& b)
@@ -42,22 +43,27 @@ bool cmp(const std::pair<std::string, int>& a,const std::pair<std::string, int>&
 	return (a.second > b.second);
 }
 
-void Score::Sort(std::map<std::string, int>& score) 
+void Sort(std::map<std::string, int> &scores) 
 {
 	std::vector<std::pair<std::string, int> > A;
-	for (auto& it : score) {
+	for (auto& it : scores) {
 		A.push_back(it);
 	}
 	std::sort(A.begin(), A.end(), cmp);
+	scores.clear();
+	for (auto it : A) {
+		scores.insert(it);
+	}
+
 }
 
 void Score::Print_scores()
 {
 	int i = 1;
 	std::cout << "Rank	Name	Score\n";
-	for (auto it = scores.begin(); it != scores.end(); ++i)
+	for (auto it = scores.begin(); it != scores.end(); ++it)
 	{
-		std::cout << i << ". " << it->first << "     " << it->second << ".\n";
+		std::cout << i << ".	" << it->first << "	" << it->second << "\n";
 		i++;
 	}
 }
