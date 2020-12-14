@@ -18,9 +18,9 @@ public:
 
 private:
 	std::string  File_Name;
-	std::map<std::string, int> scores;
+	std::multimap<std::string, int> scores;
 };
-	void Sort(std::map<std::string, int> &scores);
+	void Sort(std::multimap<std::string, int> &scores);
 
 
 #endif
