@@ -32,24 +32,20 @@ void Score::Create_file()
 	std::ofstream(file, std::fstream::out);
 }
 
-void Prev_Scores() {
-	std::ifstream input(this->File_Name);
+void Score::Prev_Scores() {
+	std::ifstream input(File_Name);
     std::string People;
     int Points;
     while (input >> People) {
         input >> Points;
-        NamePoints.insert({People, Points});
+        scores.insert({People, Points});
     }
 }
 
 void Score::Add_score(std::string name, int score)
 {
 	scores.insert(std::pair<std::string, int>(name, score));
-<<<<<<< HEAD
-	scores.Sort();
-=======
 	Sort(scores);
->>>>>>> fe27ab3caed47248b2843c52434b353707c9f71e
 }
 
 bool cmp(const std::pair<std::string, int>& a,const std::pair<std::string, int>& b)
@@ -57,11 +53,7 @@ bool cmp(const std::pair<std::string, int>& a,const std::pair<std::string, int>&
 	return (a.second > b.second);
 }
 
-<<<<<<< HEAD
-void Score::Sort() 
-=======
 void Sort(std::map<std::string, int> &scores) 
->>>>>>> fe27ab3caed47248b2843c52434b353707c9f71e
 {
 	std::vector<std::pair<std::string, int> > A;
 	for (auto& it : scores) {
@@ -89,11 +81,7 @@ void Score::Print_scores()
 void Score::Write() {
 	std::ofstream output(File_Name, std::ofstream::out);
 	std::map<std::string, int>::iterator it2;
-<<<<<<< HEAD
-	for (it2 = File_Name.begin(); it2 != File_Name.end(); it2++) {
-=======
 	for (it2 = scores.begin(); it2 != scores.end(); it2++) {
->>>>>>> fe27ab3caed47248b2843c52434b353707c9f71e
 		output << it2->first << " " << it2->second << "\n";
 	}
 }
