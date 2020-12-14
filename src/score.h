@@ -14,6 +14,7 @@ public:
 	void Add_score(std::string name, int score);
 	void Print_scores();
 	void Write();
+	void Prev_Scores();
 
 private:
 	std::string  File_Name;
