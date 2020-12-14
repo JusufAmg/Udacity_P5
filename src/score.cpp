@@ -63,9 +63,9 @@ void Score::Print_scores()
 }
 
 void Score::Write() {
-	std::ofstream output(FileName, std::ofstream::out);
+	std::ofstream output(File_Name, std::ofstream::out);
 	std::map<std::string, int>::iterator it2;
-	for (it2 = NamePoints.begin(); it2 != NamePoints.end(); it2++) {
+	for (it2 = scores.begin(); it2 != scores.end(); it2++) {
 		output << it2->first << " " << it2->second << "\n";
 	}
 }

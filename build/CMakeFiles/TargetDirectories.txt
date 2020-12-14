@@ -1,0 +1,3 @@
+/root/Udacity_P5/build/CMakeFiles/rebuild_cache.dir
+/root/Udacity_P5/build/CMakeFiles/SnakeGame.dir
+/root/Udacity_P5/build/CMakeFiles/edit_cache.dir

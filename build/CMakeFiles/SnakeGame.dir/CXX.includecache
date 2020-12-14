@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../src/score.h
+string
+-
+map
+-
+
+/root/Udacity_P5/src/score.cpp
+score.h
+-
+string
+-
+fstream
+-
+iostream
+-
+vector
+-
+algorithm
+-
+iterator
+-
+
