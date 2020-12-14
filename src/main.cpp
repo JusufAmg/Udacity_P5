@@ -19,7 +19,10 @@ int main() {
   Score score("../high_scores.txt"); //start it in a thread
   if (!(score.Available()))
   {
-      score.Create_file();
+    score.Create_file();
+  } else 
+  {
+    score.Prev_Scores();
   }
 
   while (play_again)
@@ -33,7 +36,11 @@ int main() {
       game.Run(controller, renderer, kMsPerFrame);
 
       score.Add_score(name, game.GetScore());
+<<<<<<< HEAD
+      
+=======
       score.Write();
+>>>>>>> fe27ab3caed47248b2843c52434b353707c9f71e
       score.Print_scores();
       std::cout << "Press y if you want to play again\n";
       std::cin >> input;
