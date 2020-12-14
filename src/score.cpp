@@ -53,7 +53,7 @@ bool cmp(const std::pair<std::string, int>& a,const std::pair<std::string, int>&
 	return (a.second > b.second);
 }
 
-void Sort(std::map<std::string, int> &scores) 
+void Sort(std::multimap<std::string, int> &scores) 
 {
 	std::vector<std::pair<std::string, int> > A;
 	for (auto& it : scores) {
@@ -80,7 +80,7 @@ void Score::Print_scores()
 
 void Score::Write() {
 	std::ofstream output(File_Name, std::ofstream::out);
-	std::map<std::string, int>::iterator it2;
+	std::multimap<std::string, int>::iterator it2;
 	for (it2 = scores.begin(); it2 != scores.end(); it2++) {
 		output << it2->first << " " << it2->second << "\n";
 	}
