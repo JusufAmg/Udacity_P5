@@ -31,6 +31,7 @@ int main() {
       Controller controller;
       Game game(kGridWidth, kGridHeight);
       game.Run(controller, renderer, kMsPerFrame);
+      renderer.Destroy();
       t.join();
       score.Add_score(name, game.GetScore());
       score.Write();
