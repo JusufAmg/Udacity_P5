@@ -1,26 +1,45 @@
-#ifndef SCORE
-#define SCORE
+#include <iostream>
+#include "controller.h"
+#include "game.h"
+#include "renderer.h"
+#include "score.h"
 
-#include <string>
-#include <map>
+int main() {
+  constexpr std::size_t kFramesPerSecond{60};
+  constexpr std::size_t kMsPerFrame{1000 / kFramesPerSecond};
+  constexpr std::size_t kScreenWidth{640};
+  constexpr std::size_t kScreenHeight{640};
+  constexpr std::size_t kGridWidth{32};
+  constexpr std::size_t kGridHeight{32};
 
-class Score
-{
-public:
-	Score(std::string file_name);
-	bool Available();
-	std::string Get_file();
-	void Create_file();
-	void Add_score(std::string name, int score);
-	void Print_scores();
-	void Write();
-	void Prev_Scores();
+  std::string name;
+  bool play_again = true;
+  char input;
+  
+  Score score("../high_scores.txt"); //start it in a thread
+  
+  while (play_again)
+  {
+      std::cout << "Enter Your Name: \n";
+      std::cin >> name;
 
-private:
-	std::string  File_Name;
-	std::map<std::string, int> scores;
-};
-	void Sort(std::map<std::string, int> &scores);
+      Renderer renderer(kScreenWidth, kScreenHeight, kGridWidth, kGridHeight);
+      Controller controller;
+      Game game(kGridWidth, kGridHeight);
+      game.Run(controller, renderer, kMsPerFrame);
 
+      score.Add_score(name, game.GetScore());
 
-#endif
+      score.Write();
+      score.Print_scores();
+      std::cout << "Press y if you want to play again\n";
+      std::cin >> input;
+      if (input == 'y') continue;
+      else
+      {
+          play_again = false;
+      }
+  }
+  
+  return 0;
+}
