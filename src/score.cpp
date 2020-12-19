@@ -7,12 +7,24 @@
 #include <iterator>
 
 
-Score::Score(std::string file_name) : File_Name(file_name) 
+Score::Score(std::string file_name) : File_Name(file_name)  // good
 {
-
+	std::ifstream input(file_name);
+	if (!input) {
+		std::ofstream(file_name, std::fstream::out);
+	} 
+	else 
+	{
+		std::string Player;
+    	int Score;
+    	while (input >> Player) {
+        	input >> Score;
+        	scores.insert({Player, Score});
+    	}
+	}
 }
 
-std::string Score::Get_file() 
+/*std::string Score::Get_file() 
 {
 	return File_Name;
 }
@@ -40,12 +52,20 @@ void Score::Prev_Scores() {
         input >> Points;
         scores.insert({People, Points});
     }
-}
+}*/
 
-void Score::Add_score(std::string name, int score)
+void Score::Add_score(std::string name, int score) //good check the sort
 {
 	scores.insert(std::pair<std::string, int>(name, score));
 	Sort(scores);
+}
+
+void Score::Write() { //good check the multimap with same key
+	std::ofstream output(File_Name, std::ofstream::out);
+	std::multimap<std::string, int>::iterator it2;
+	for (it2 = scores.begin(); it2 != scores.end(); it2++) {
+		output << it2->first << " " << it2->second << "\n";
+	}
 }
 
 bool cmp(const std::pair<std::string, int>& a,const std::pair<std::string, int>& b)
@@ -65,10 +85,16 @@ void Sort(std::multimap<std::string, int> &scores)
 		scores.insert(it);
 	}
 
+
 }
 
-void Score::Print_scores()
+void Score::Print_scores() //good
 {
+	std::vector<std::pair<std::string, int> > A;
+	for (auto& it : scores) {
+		A.push_back(it);
+	}
+	std::sort(A.begin(), A.end(), cmp);
 	int i = 1;
 	std::cout << "Rank	Name	Score\n";
 	for (auto it = scores.begin(); it != scores.end(); ++it)
@@ -78,10 +104,3 @@ void Score::Print_scores()
 	}
 }
 
-void Score::Write() {
-	std::ofstream output(File_Name, std::ofstream::out);
-	std::multimap<std::string, int>::iterator it2;
-	for (it2 = scores.begin(); it2 != scores.end(); it2++) {
-		output << it2->first << " " << it2->second << "\n";
-	}
-}
