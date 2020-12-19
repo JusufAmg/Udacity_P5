@@ -34,8 +34,11 @@ Renderer::Renderer(const std::size_t screen_width,
 }
 
 Renderer::~Renderer() {
-  SDL_DestroyWindow(sdl_window);
   SDL_Quit();
+}
+
+void Renderer::Destroy(){
+    SDL_DestroyWindow(sdl_window);
 }
 
 void Renderer::Render(Snake const snake, SDL_Point const &food) {
