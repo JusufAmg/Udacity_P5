@@ -1,8 +1,10 @@
 #include <iostream>
+#include <thread>
 #include "controller.h"
 #include "game.h"
 #include "renderer.h"
 #include "score.h"
+
 
 int main() {
   constexpr std::size_t kFramesPerSecond{60};
@@ -17,6 +19,8 @@ int main() {
   char input;
   
   Score score("../high_scores.txt"); //start it in a thread
+  std::thread t = std::thread(&Score::Data, score); // call member function on object v
+
   
   while (play_again)
   {
@@ -27,9 +31,8 @@ int main() {
       Controller controller;
       Game game(kGridWidth, kGridHeight);
       game.Run(controller, renderer, kMsPerFrame);
-
+      t.join();
       score.Add_score(name, game.GetScore());
-
       score.Write();
       score.Print_scores();
       std::cout << "Press y if you want to play again\n";
