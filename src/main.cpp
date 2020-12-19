@@ -19,8 +19,7 @@ int main() {
   char input;
   
   Score score("../high_scores.txt"); //start it in a thread
-  std::thread t = std::thread(&Score::Data, score); // call member function on object v
-
+  std::thread t = std::thread(&Score::Data, score); 
   
   while (play_again)
   {
