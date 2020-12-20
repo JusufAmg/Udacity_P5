@@ -17,7 +17,7 @@ int main() {
   std::string name;
   bool play_again = true;
   char input;
-  bool flag = flase;
+  bool flag = false;
   Score score("../high_scores.txt"); //start it in a thread
   std::thread t = std::thread(&Score::Data, score); 
   
