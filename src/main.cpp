@@ -17,7 +17,7 @@ int main() {
   std::string name;
   bool play_again = true;
   char input;
-  
+  bool flag = flase;
   Score score("../high_scores.txt"); //start it in a thread
   std::thread t = std::thread(&Score::Data, score); 
   
@@ -31,7 +31,11 @@ int main() {
       Game game(kGridWidth, kGridHeight);
       game.Run(controller, renderer, kMsPerFrame);
       renderer.Destroy();
-      t.join();
+      if (!flag)
+      {
+        t.join();
+        flag = true;
+      }
       score.Add_score(name, game.GetScore());
       score.Write();
       score.Print_scores();
